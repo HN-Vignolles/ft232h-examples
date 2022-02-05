@@ -1,4 +1,4 @@
-# FT232-examples
+# FT232H
 
 _The FT232H is a single channel USB 2.0 Hi-Speed (480Mb/s) to UART/FIFO IC. It has a Multi-Protocol Synchronous Serial Engine (MPSSE). The MPSSE can be configured to a number of industry standard serial interface protocols such as JTAG, I2C or SPI (MASTER), or it can be used to implement a proprietary bus protocol._ [1] 
 ```
