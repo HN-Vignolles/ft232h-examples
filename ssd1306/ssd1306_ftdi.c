@@ -1,5 +1,5 @@
 #include "ssd1306_ftdi.h"
-#include "src/support.h"
+#include "support.h"
 
 extern struct mpsse_context *mpsse;
 

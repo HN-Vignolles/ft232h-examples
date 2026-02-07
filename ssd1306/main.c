@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <ftdi.h>
 #include <string.h>
-#include "src/mpsse.h"
+#include <signal.h>
+#include "mpsse.h"
 #include "ssd1306_ftdi.h"
 #include "font5x7.h"
 

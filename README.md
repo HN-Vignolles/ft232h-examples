@@ -1,6 +1,6 @@
 # FT232H
 
-_The FT232H is a single channel USB 2.0 Hi-Speed (480Mb/s) to UART/FIFO IC. It has a Multi-Protocol Synchronous Serial Engine (MPSSE). The MPSSE can be configured to a number of industry standard serial interface protocols such as JTAG, I2C or SPI (MASTER), or it can be used to implement a proprietary bus protocol._ [1] 
+_The FT232H is a single channel USB 2.0 Hi-Speed (480Mb/s) to UART/FIFO IC. It has a Multi-Protocol Synchronous Serial Engine (MPSSE). The MPSSE can be configured to a number of industry standard serial interface protocols such as JTAG, I2C or SPI (MASTER), or it can be used to implement a proprietary bus protocol._ ([DS_FT232H.pdf][1], [DS_UM232H.pdf][2]) 
 ```
         UM232H Pin Out
       ┌─────╥─────╥─────┐
@@ -25,5 +25,12 @@ _The FT232H is a single channel USB 2.0 Hi-Speed (480Mb/s) to UART/FIFO IC. It h
 
 * USB bus powered configuration
 ```
-[1] https://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT232H.pdf
-https://www.ftdichip.com/Support/Documents/DataSheets/Modules/DS_UM232H.pdf
+
+## Build
+1. Install `libftdi-devel`, `swig`
+2. Run `git submodule update --init --recursive`
+3. From libmpsse/src directory run `./configure`
+4. Go to some example and run `make`
+
+[1]: https://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT232H.pdf
+[2]: https://www.ftdichip.com/Support/Documents/DataSheets/Modules/DS_UM232H.pdf

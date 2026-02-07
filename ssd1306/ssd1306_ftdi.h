@@ -1,7 +1,7 @@
 #ifndef __SSD1306_H
 #define __SSD1306_H
 
-#include "src/mpsse.h"
+#include "mpsse.h"
 
 // SSD1306 display connection:
 //   GPIOH2 --> CS
