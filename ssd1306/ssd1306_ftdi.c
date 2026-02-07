@@ -36,14 +36,14 @@ void SPIx_SendBuf(struct mpsse_context *SPI, uint8_t *pBuf, uint32_t length) {
 static void SSD1306_cmd(uint8_t cmd) {
     unsigned char buf[4];
 	// Deassert DC pin -> command transmit
-    PinLow(mpsse,SSD1306_DC); 
+    PinLow(mpsse, SSD1306_DC); 
     buf[0] = mpsse->tx; //Opcode 0x10
     buf[1] = 0; //(LengthL)Length=1 means 2 bytes
     buf[2] = 0; //(LengthH)
     buf[3] = cmd;
     // Deassert DC pin -> command transmit
-    PinLow(mpsse,SSD1306_DC);
-    raw_write(mpsse,buf,4);
+    PinLow(mpsse, SSD1306_DC);
+    raw_write(mpsse, buf, 4);
 }
 
 // Send double byte command to display
@@ -58,8 +58,8 @@ static void SSD1306_cmd_double(uint8_t cmd1, uint8_t cmd2) {
     buf[3] = cmd1;
     buf[4] = cmd2;
 	// Deassert DC pin -> command transmit
-    PinLow(mpsse,SSD1306_DC);
-    raw_write(mpsse,buf,5);
+    PinLow(mpsse, SSD1306_DC);
+    raw_write(mpsse, buf, 5);
 }
 
 /*
@@ -79,18 +79,18 @@ static void SSD1306_data(uint8_t data) {
 // note: SPI peripheral must be initialized before
 void SSD1306_Init(void) {
 	// Hardware display reset
-    PinHigh(mpsse,SSD1306_CS); //SSD1306_CS_H();
-    PinLow(mpsse,SSD1306_RST); //SSD1306_RST_L();
-    PinHigh(mpsse,SSD1306_RST); //SSD1306_RST_H();
-    PinLow(mpsse,SSD1306_CS); //SSD1306_CS_L();
+    PinHigh(mpsse, SSD1306_CS); //SSD1306_CS_H();
+    PinLow(mpsse, SSD1306_RST); //SSD1306_RST_L();
+    PinHigh(mpsse, SSD1306_RST); //SSD1306_RST_H();
+    PinLow(mpsse, SSD1306_CS); //SSD1306_CS_L();
 
 	// Initial display configuration
 
     // Set multiplex ratio (visible lines)
-	SSD1306_cmd_double(SSD1306_CMD_SETMUX,0x3F); // 64MUX
+	SSD1306_cmd_double(SSD1306_CMD_SETMUX, 0x3F); // 64MUX
 
     // Set display offset (offset of first line from the top of display)
-	SSD1306_cmd_double(SSD1306_CMD_SETOFFS,0x00); // Offset: 0
+	SSD1306_cmd_double(SSD1306_CMD_SETOFFS, 0x00); // Offset: 0
 
     // Set display start line (first line displayed)
 	SSD1306_cmd(SSD1306_CMD_STARTLINE | 0x00); // Start line: 0
@@ -106,14 +106,14 @@ void SSD1306_Init(void) {
 	//         set   - alternative COM pin configuration (reset value)
 	// bit[5]: reset - disable COM left/right remap (reset value)
 	//         set   - enable COM left/right remap
-	SSD1306_cmd_double(SSD1306_CMD_COM_HW,0x12);
+	SSD1306_cmd_double(SSD1306_CMD_COM_HW, 0x12);
 
     // Set Vcomh deselect level, values: 0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70
 	// This value affects on contrast level
-	SSD1306_cmd_double(SSD1306_CMD_VCOMH,0x30); // ~0.83V x Vcc
+	SSD1306_cmd_double(SSD1306_CMD_VCOMH, 0x30); // ~0.83V x Vcc
 
 	// Set contrast control
-	SSD1306_cmd_double(SSD1306_CMD_CONTRAST,0x7F); // Contrast: middle level
+	SSD1306_cmd_double(SSD1306_CMD_CONTRAST, 0x7F); // Contrast: middle level
 
 	// Disable entire display ON
 	SSD1306_cmd(SSD1306_CMD_EDOFF); // Display follows RAM content
@@ -127,10 +127,10 @@ void SSD1306_Init(void) {
 	// 0xF0 value gives maximum frequency (maximum Fosc without divider)
 	// 0x0F value gives minimum frequency (minimum Fosc divided by 16)
 	// The higher display frequency decreases image flickering but increases current consumption and vice versa
-	SSD1306_cmd_double(SSD1306_CMD_CLOCKDIV,0xF0);
+	SSD1306_cmd_double(SSD1306_CMD_CLOCKDIV, 0xF0);
 
 	// Enable charge pump generator
-	SSD1306_cmd_double(SSD1306_CMD_CHGPUMP,0x14);
+	SSD1306_cmd_double(SSD1306_CMD_CHGPUMP, 0x14);
 
 	// Display ON
 	SSD1306_cmd(SSD1306_CMD_DISP_ON); // Display enabled
@@ -139,7 +139,7 @@ void SSD1306_Init(void) {
 	// 0x00 - horizontal
 	// 0x01 - vertical
 	// 0x02 - page (reset state)
-	SSD1306_cmd_double(SSD1306_CMD_MEM_MODE,0x00);
+	SSD1306_cmd_double(SSD1306_CMD_MEM_MODE, 0x00);
 
 	// Assert CS pin
     PinHigh(mpsse,SSD1306_CS); //SSD1306_CS_H();
@@ -150,7 +150,7 @@ void SSD1306_Init(void) {
 //   contrast - new contrast value (0..255)
 void SSD1306_Contrast(uint8_t contrast) {
     PinLow(mpsse,SSD1306_CS); //SSD1306_CS_L();
-	SSD1306_cmd_double(SSD1306_CMD_CONTRAST,contrast);
+	SSD1306_cmd_double(SSD1306_CMD_CONTRAST, contrast);
     PinHigh(mpsse,SSD1306_CS); //SSD1306_CS_H();
 }
 
